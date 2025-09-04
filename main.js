@@ -1,4 +1,4 @@
-/* ====== Main Framework ====== */
+/* ====== Main Framework (unchanged chain; adds startup) ====== */
 let actx, masterGain, analyser;
 let currentBuffer, currentSource;
 const rack = [];
@@ -87,7 +87,7 @@ document.getElementById('btnAdd').addEventListener('click', ()=>{
   wireChain();
 });
 
-/* ===== Export WAV (dry buffer for now) ===== */
+/* ===== Export WAV (dry buffer) ===== */
 document.getElementById('btnExport').addEventListener('click', ()=>{
   if(!currentBuffer) return alert('Nothing to export');
   const wav = bufferToWav(currentBuffer);
@@ -110,3 +110,26 @@ function bufferToWav(buffer){
   for(let i=0;i<buffer.length;i++)for(let ch=0;ch<numCh;ch++){let s=Math.max(-1,Math.min(1,chans[ch][i]));view.setInt16(pos,s<0?s*0x8000:s*0x7FFF,true);pos+=2;}
   return ab;
 }
+
+/* ====== Start-Up Sequence (splash + audio unlock) ====== */
+(function startup(){
+  const splash = document.getElementById('splash');
+  const enter  = document.getElementById('enterBtn');
+  if (!splash || !enter) return;
+  let unlocked = false;
+
+  async function unlock(){
+    if (unlocked) return;
+    await ensureCtx();
+    await actx.resume(); // required by autoplay policies
+    unlocked = true;
+    splash.style.opacity = '0';
+    splash.style.pointerEvents = 'none';
+    setTimeout(()=> splash.remove(), 400);
+  }
+
+  enter.addEventListener('click', unlock);
+  // also allow any key/gesture
+  window.addEventListener('keydown', unlock, { once:true });
+  window.addEventListener('pointerdown', unlock, { once:true });
+})();

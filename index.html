@@ -7,6 +7,17 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Splash / Start-Up -->
+  <div id="splash" class="splash">
+    <div class="splash-card">
+      <div class="logo">🎛 FX Rack</div>
+      <div class="tag">Audio Lab — Web Audio API</div>
+      <div class="prog"><div class="bar"></div></div>
+      <button id="enterBtn">Enter</button>
+      <small class="hint">Tip: load an MP3, then add effects → visualize → export</small>
+    </div>
+  </div>
+
   <header>
     <h1>🎛 FX Rack</h1>
     <p class="sub">Load audio → Add effects → Adjust → Visualize → Export</p>
@@ -46,6 +57,9 @@
         <span class="viz-mode">
           <label><input type="radio" name="vizMode" value="bars" checked> Bars</label>
           <label><input type="radio" name="vizMode" value="radial"> Radial</label>
+          <label><input type="radio" name="vizMode" value="wave"> Waveform</label>
+          <label><input type="radio" name="vizMode" value="spec"> Spectrogram</label>
+          <label><input type="radio" name="vizMode" value="vu"> VU: Bass/Mid/Treble</label>
         </span>
       </h2>
       <canvas id="vizCanvas"></canvas>
