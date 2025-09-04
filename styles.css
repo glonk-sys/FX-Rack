@@ -1,0 +1,98 @@
+:root {
+  --bg: #000;
+  --panel: #111;
+  --ink: #fff;
+  --accent: #e50914;
+  --line: #333;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
+header {
+  text-align:center;
+  padding:20px;
+  background:#111;
+  border-bottom:2px solid var(--accent);
+}
+h1 { margin:0; color:var(--accent); font-size:32px; }
+.sub { color:#aaa; font-size:14px; }
+
+.layout {
+  display:grid;
+  grid-template-columns:280px 1fr 1fr;
+  gap:20px;
+  padding:20px;
+}
+@media(max-width:1000px){ .layout{grid-template-columns:1fr;} }
+
+.panel {
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:16px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.35);
+  transition: all .2s ease;
+}
+.panel:hover { box-shadow:0 10px 35px rgba(229,9,20,0.4); }
+
+.panel h2 {
+  margin-top:0;
+  color:var(--accent);
+  font-size:16px;
+  border-bottom:1px solid var(--line);
+  padding-bottom:4px;
+}
+.row { display:flex; gap:8px; margin:8px 0; flex-wrap:wrap; }
+
+button, select, input[type=range] {
+  background:#222;
+  color:var(--ink);
+  border:1px solid var(--accent);
+  border-radius:6px;
+  padding:6px 10px;
+  transition: background .2s ease;
+}
+button:hover, select:hover { background:var(--accent); cursor:pointer; }
+
+.rack .fx {
+  background:#1a1a1a;
+  border:1px solid var(--line);
+  border-radius:8px;
+  margin:8px 0;
+  padding:10px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.4);
+}
+.fx header { display:flex; justify-content:space-between; align-items:center; }
+.fx h3 { margin:0; font-size:14px; color:var(--accent); }
+.fx .controls { margin-top:6px; }
+.fx .row { align-items:center; }
+.fx input[type=range] { flex:1; }
+
+footer {
+  text-align:center;
+  padding:10px;
+  border-top:1px solid var(--line);
+  color:#555;
+}
+
+/* --- Visualizer --- */
+.visualizer { position: relative; }
+.visualizer h2 { display:flex; align-items:center; justify-content:space-between; }
+.viz-mode label { margin-left:10px; font-size:12px; color:#bbb; }
+.viz-mode input { vertical-align:middle; margin-right:4px; }
+
+#vizCanvas{
+  width:100%;
+  height:320px;
+  display:block;
+  background:
+    radial-gradient(1200px 400px at 50% 120%, rgba(229,9,20,.08), transparent 50%),
+    linear-gradient(#0b0b0b, #050505);
+  border:1px solid #222;
+  border-radius:12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.35), inset 0 0 40px rgba(229,9,20,.08);
+}
